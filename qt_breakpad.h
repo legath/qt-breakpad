@@ -16,6 +16,7 @@
 
 #elif defined(Q_OS_LINUX)
 #include "vendor/breakpad/src/client/linux/handler/exception_handler.h"
+#include "vendor/breakpad/src/client/linux/handler/minidump_descriptor.h"
 
 #endif // OS-specific includes
 
@@ -77,7 +78,7 @@ private:
                                  MDRawAssertionInfo* assertion,
                                  bool succeeded);
 #elif defined(Q_OS_LINUX)
-    static bool qMinidumpWrapper(const MinidumpDescriptor& descriptor,
+    static bool qMinidumpWrapper(const google_breakpad::MinidumpDescriptor & descriptor,
                                  QMinidumpContextWrapper* context,
                                  bool succeeded);
 #endif

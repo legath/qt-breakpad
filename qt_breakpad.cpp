@@ -42,7 +42,7 @@ void QtBreakpad::buildBreakpadHandler(const QString& reportPath,
     );
 #elif defined(Q_OS_LINUX)
     std::string pathAsStr = reportPath.toStdString();
-    google_breakpad::MinidumpDescriptor md(reportPath);
+    google_breakpad::MinidumpDescriptor md(pathAsStr);
     this->_breakpad_handler = new google_breakpad::ExceptionHandler(
         md,
         filterCallBack,
@@ -77,7 +77,7 @@ bool QtBreakpad::qMinidumpWrapper(const wchar_t* dump_path,
     Q_UNUSED(exinfo);
     Q_UNUSED(assertion);
 #elif defined(Q_OS_LINUX)
-bool QtBreakpad::qMinidumpWrapper(const MinidumpDescriptor& descriptor,
+bool QtBreakpad::qMinidumpWrapper(const google_breakpad::MinidumpDescriptor& descriptor,
                                   QMinidumpContextWrapper* contextWrapper,
                                   bool succeeded)
 {

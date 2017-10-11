@@ -25,10 +25,13 @@ unix:HEADERS += $$PWD/vendor/breakpad/src/client/linux/handler/exception_handler
 unix:HEADERS += $$PWD/vendor/breakpad/src/client/linux/crash_generation/crash_generation_client.h
 unix:HEADERS += $$PWD/vendor/breakpad/src/client/linux/handler/minidump_descriptor.h
 unix:HEADERS += $$PWD/vendor/breakpad/src/client/linux/minidump_writer/minidump_writer.h
+unix:HEADERS += $$PWD/vendor/breakpad/src/client/linux/microdump_writer/microdump_writer.h
 unix:HEADERS += $$PWD/vendor/breakpad/src/client/linux/minidump_writer/line_reader.h
 unix:HEADERS += $$PWD/vendor/breakpad/src/client/linux/minidump_writer/linux_dumper.h
 unix:HEADERS += $$PWD/vendor/breakpad/src/client/linux/minidump_writer/linux_ptrace_dumper.h
 unix:HEADERS += $$PWD/vendor/breakpad/src/client/linux/minidump_writer/directory_reader.h
+unix:HEADERS += $$PWD/vendor/breakpad/src/client/linux/dump_writer_common/thread_info.h
+unix:HEADERS += $$PWD/vendor/breakpad/src/client/linux/dump_writer_common/ucontext_reader.h
 unix:HEADERS += $$PWD/vendor/breakpad/src/client/linux/log/log.h
 unix:HEADERS += $$PWD/vendor/breakpad/src/client/minidump_file_writer-inl.h
 unix:HEADERS += $$PWD/vendor/breakpad/src/client/minidump_file_writer.h
@@ -56,8 +59,11 @@ unix:SOURCES += $$PWD/vendor/breakpad/src/client/linux/crash_generation/crash_ge
 unix:SOURCES += $$PWD/vendor/breakpad/src/client/linux/handler/exception_handler.cc
 unix:SOURCES += $$PWD/vendor/breakpad/src/client/linux/handler/minidump_descriptor.cc
 unix:SOURCES += $$PWD/vendor/breakpad/src/client/linux/minidump_writer/minidump_writer.cc
+unix:SOURCES += $$PWD/vendor/breakpad/src/client/linux/microdump_writer/microdump_writer.cc
 unix:SOURCES += $$PWD/vendor/breakpad/src/client/linux/minidump_writer/linux_dumper.cc
 unix:SOURCES += $$PWD/vendor/breakpad/src/client/linux/minidump_writer/linux_ptrace_dumper.cc
+unix:SOURCES += $$PWD/vendor/breakpad/src/client/linux/dump_writer_common/thread_info.cc
+unix:SOURCES += $$PWD/vendor/breakpad/src/client/linux/dump_writer_common/ucontext_reader.cc
 unix:SOURCES += $$PWD/vendor/breakpad/src/client/linux/log/log.cc
 unix:SOURCES += $$PWD/vendor/breakpad/src/client/minidump_file_writer.cc
 unix:SOURCES += $$PWD/vendor/breakpad/src/common/linux/linux_libc_support.cc
@@ -68,6 +74,7 @@ unix:SOURCES += $$PWD/vendor/breakpad/src/common/linux/guid_creator.cc
 unix:SOURCES += $$PWD/vendor/breakpad/src/common/linux/elfutils.cc
 unix:SOURCES += $$PWD/vendor/breakpad/src/common/string_conversion.cc
 unix:SOURCES += $$PWD/vendor/breakpad/src/common/convert_UTF.c
+
 
 ## breakpad needs debug info inside binaries
 
