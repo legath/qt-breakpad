@@ -17,7 +17,8 @@
 #elif defined(Q_OS_LINUX)
 #include "vendor/breakpad/src/client/linux/handler/exception_handler.h"
 #include "vendor/breakpad/src/client/linux/handler/minidump_descriptor.h"
-
+#elif defined(Q_OS_MAC)
+#include "vendor/breakpad/src/client/mac/handler/exception_handler.h"
 #endif // OS-specific includes
 
 class QtBreakpad
@@ -81,6 +82,12 @@ private:
     static bool qMinidumpWrapper(const google_breakpad::MinidumpDescriptor & descriptor,
                                  QMinidumpContextWrapper* context,
                                  bool succeeded);
+
+#elif defined(Q_OS_MAC)
+    static bool qMinidumpWrapper(const char *dump_dir,
+                                      const char *minidump_id,
+                                      QMinidumpContextWrapper* contextWrapper,
+                                      bool succeeded);
 #endif
 };
 

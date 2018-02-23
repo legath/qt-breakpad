@@ -51,6 +51,16 @@ void QtBreakpad::buildBreakpadHandler(const QString& reportPath,
         true,
         -1
     );
+#elif defined(Q_OS_MAC)
+    std::string pathAsStr = reportPath.toStdString();
+    this->_breakpad_handler = new google_breakpad::ExceptionHandler(
+        pathAsStr,
+        filterCallBack,
+        minidumpCallback,
+        callbackContext,
+        true,
+        NULL
+    );
 #endif
 }
 
@@ -81,6 +91,12 @@ bool QtBreakpad::qMinidumpWrapper(const google_breakpad::MinidumpDescriptor& des
                                   QMinidumpContextWrapper* contextWrapper,
                                   bool succeeded)
 {
+#elif defined(Q_OS_MAC)
+bool QtBreakpad::qMinidumpWrapper(const char *dump_dir,
+                                  const char *minidump_id,
+                                  QMinidumpContextWrapper* contextWrapper,
+                                  bool succeeded)
+{
 #endif
     // if there's no dump file, not much to do
     if (!succeeded) { return false; }
@@ -95,6 +111,9 @@ bool QtBreakpad::qMinidumpWrapper(const google_breakpad::MinidumpDescriptor& des
     minidumpFileName = minidumpDir.absoluteFilePath(QString::fromWCharArray(minidump_id) + ".dmp");
 #elif defined(Q_OS_LINUX)
     minidumpFileName = descriptor.path();
+#elif defined(Q_OS_MAC)
+    QDir minidumpDir = QDir(QString(dump_dir));
+    minidumpFileName = minidumpDir.absoluteFilePath(QString(minidump_id) + ".dmp");
 #endif
 
     QFile minidumpFile(minidumpFileName);
